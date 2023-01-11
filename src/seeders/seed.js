@@ -1,5 +1,6 @@
 const db = require("../utils/database");
 const Users = require("../models/users.model");
+const Todos = require("../models/todos.models");
 
 const users = [
   {
@@ -20,10 +21,10 @@ const users = [
 ];
 
 const todos = [
-  { title: "Tarea 1", description: "Descripcion para 1", userID: 1 },
-  { title: "Tarea 2", description: "Descripcion para 2", userID: 1 },
-  { title: "Tarea Imposible", userID: 2 },
-  { title: "Dormir", description: "Por que node no me deja", userID: 3 },
+  { title: "Tarea 1", description: "Descripcion para 1", userId: 1 },
+  { title: "Tarea 2", description: "Descripcion para 2", userId: 1 },
+  { title: "Tarea Imposible", userId: 2 },
+  { title: "Dormir", description: "Por que node no me deja", userId: 3 },
 ];
 
 // const categories = [];
@@ -39,5 +40,8 @@ db.sync({ force: true })
   .then(() => {
     console.log("Iniciando con el sembradio malicioso");
     users.forEach((user) => Users.create(user));
+    setTimeout(() => {
+      todos.forEach((todo) => Todos.create(todo));
+    }, 100);
   })
   .catch((error) => console.log(error));
